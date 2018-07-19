@@ -1,25 +1,29 @@
 # Getting Started with Azure Online Training
  
-__Disclaimer__
 
-This document is to assist with getting started on Azure Online Training. This is not a comprehensive list of all Azure Trainings available. It is a subset for getting started quickly. This is also not an endorsement of any one vendor or partner.
- 
-- Contents
-    * Getting Started with Azure Online Training
-    * Disclaimer
-    * Introduction
-    * Academy.Microsoft.com
-    * Overview
-    * Signing up for a Microsoft Account
-    * Signing up for an edX.org account
-    * Linking accounts (Microsoft and edX)
-    * Enrolling in a Track
+#### Contents
+
+   * Getting Started with Azure Online Training
+   * Introduction
+   * Disclaimer
+   * 
+   * Signing up for a Microsoft Account
+   * Signing up for an edX.org account
+   * Linking accounts (Microsoft and edX)
+   * Academy.Microsoft.com
+   * AISchool.Microsoft.com
+   * IoTschool.Microsoft.com
+
  
  
 
 __Introduction__
 
 Come back to this.
+ 
+__Disclaimer__
+
+This document is to assist with getting started on Azure Online Training. This is not a comprehensive list of all Azure Trainings available. It is a subset for getting started quickly. This is also not an endorsement of any one vendor or partner.
  
 ### Academy.Microsoft.com
 __Overview__
@@ -62,6 +66,8 @@ Click on “Create one!”
 Follow the instruction for creating a new account. Remember the username and password.
 Signing up for an edX.org account
  
+__Signing up for an edX Account__
+
 To sign up for an edX.org account open a browser and head to https://www.edx.org/
 Find the “Register” button in the upper right-hand corner – 
  
