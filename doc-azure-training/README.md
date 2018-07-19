@@ -47,7 +47,7 @@ Signing up for a Microsoft Account is simple and free. If you have a Microsoft A
  
 To get started head to https://academy.microsoft.com (Most Microsoft websites can be used to setup an account)
  
-In the upper right-hand corner click “Sign In” Should look like this:
+In the upper right-hand corner click "Sign In" Should look like this:
 
 ![alt text][Img5]
  
@@ -55,14 +55,14 @@ You will come to this page:
 
 ![alt text][Img6]
  
-Click on “Create one!” 
+Click on "Create one!" 
  
 Follow the instruction for creating a new account. Remember the username and password.
 
 <a name="edx">__Signing up for an edX.org account__</a>
  
 To sign up for an edX.org account open a browser and head to https://www.edx.org/
-Find the “Register” button in the upper right-hand corner – 
+Find the "Register" button in the upper right-hand corner:
 
  ![alt text][Img7]
 
@@ -87,16 +87,16 @@ Now that you have a Microsoft account and an edX account you need to link them, 
           On the home screen you should this bar.
           ![alt text][Img12]
 
-  2.    Click “Link your edX account”
-  3.    Sign into edX with the email and password from the ‘Sign up for edX’ step. 
+  2.    Click "Link your edX account"
+  3.    Sign into edX with the email and password from the 'Sign up for edX' step. 
  
-  4.    Click “Sign in”
+  4.    Click "Sign in"
       a.  Note: If you have not activated your edX account you may get this error screen. 
           i.  Leave this browser window open. 
           ii. Open a new browser window. 
           iii. Check your email that you signed up with and follow the activation instructions. 
-          iv. Close this browser window and go back to the edX sign-in page for Academy.Microsoft.com
-  5.    Click “Allow” on the next screen. After which you will return to the Microsoft page.
+          iv. Close this browser window and go back to the edX sign-in page for academy.microsoft.com
+  5.    Click "Allow" on the next screen. After which you will return to the Microsoft page.
 
 ![alt text][Img14]
 
@@ -116,9 +116,9 @@ Choose one of the eight (8) tracks to begin training.
   7. Entry Level Software Development
   8. IT Support
  
-For the rest of this demo we will focus on “Cloud Administration”. The other tracks follow the same pattern. 
+For the rest of this demo we will focus on "Cloud Administration". The other tracks follow the same pattern. 
  
-  1. Find the track you wish to enroll in. Click the “Enroll now” button
+  1. Find the track you wish to enroll in. Click the "Enroll now" button
 
         ![alt text][Img16]
 
@@ -126,21 +126,20 @@ For the rest of this demo we will focus on “Cloud Administration”. The other tra
 
         ![alt text][Img17]
   
-  3. Click the “view track details” on the track card
+  3. Click the "view track details" on the track card
 
         ![alt text][Img19]
 
-  4. You should now see list of the required to complete this track. Courses do not have to be completed in order. Click “Get Started” on the first course.
+  4. You should now see list of the required to complete this track. Courses do not have to be completed in order. Click "Get Started" on the first course.
 
         ![alt text][Img20]
         ![alt text][Img21]
 
-
-  5. Click “Ok” on the “Go to course” screen
+  5. Click "Ok" on the "Go to course" screen
 
         ![alt text][Img23]
 
-  6. Select “Enroll Now” on the course home page
+  6. Select "Enroll Now" on the course home page
 
         ![alt text][Img25]
 
@@ -168,13 +167,12 @@ Courses can be filters by
  
 Courses times range from 11 minutes to over 16 hours for a few of the courses. 
  
-Courses can be made up of multiple modules. Progress on a course or all the courses can be tracked by logging in with your personal Microsoft account. If you need help signing up for a personal Microsoft account refer to the “Signing up for a Microsoft Account” on page 5.
+Courses can be made up of multiple modules. Progress on a course or all the courses can be tracked by logging in with your personal Microsoft account. If you need help signing up for a personal Microsoft account refer to [Signing up for a Microsoft Account](#signup) above.
  
 Courses are free of charge but the resources for the course are the responsibility of the person taking the course. 
  
 The web address for AI School is http://aischool.microsoft.com
 
- 
 __IoT School__
 
 IoT School is another set of courses for jump-starting IoT education on the Microsoft platform. Courses here are not split into tracks like academy.microsoft.com. The courses are tagged as beginner, intermediate, and advanced. 
@@ -187,33 +185,33 @@ Courses can be filters by
  
 Courses times range from 11 minutes to over 2 hours for a few of the courses. 
  
-Courses can be made up of multiple modules. Progress on a course or all the courses can be tracked by logging in with your personal Microsoft account. If you need help signing up for a personal Microsoft account refer to the “Signing up for a Microsoft Account” on page 5.
+Courses can be made up of multiple modules. Progress on a course or all the courses can be tracked by logging in with your personal Microsoft account. If you need help signing up for a personal Microsoft account refer to the [Signing up for a Microsoft Account](#signup) above.
  
 Courses are free of charge but the resources for the course are the responsibility of the person taking the course. 
  
 The web address for IoT School is http://iotschool.microsoft.com
 
-[Img5]: ./files/Image005.png
-[Img6]: ./files/Image006.png
-[Img7]: ./files/Image007.png
-[Img8]: ./files/Image008.jpg
-[Img9]: ./files/Image009.png
-[Img10]: ./files/Image010.png
-[Img11]: ./files/Image011.jpg
-[Img12]: ./files/Image012.png
-[Img13]: ./files/Image013.jpg
-[Img14]: ./files/Image014.png
-[Img15]: ./files/Image015.jpg
-[Img16]: ./files/Image016.png
-[Img17]: ./files/Image017.png
-[Img18]: ./files/Image018.jpg
-[Img19]: ./files/Image019.png
-[Img20]: ./files/Image020.png
-[Img21]: ./files/Image021.png
-[Img22]: ./files/Image022.jpg
-[Img23]: ./files/Image023.png
-[Img24]: ./files/Image024.jpg
-[Img25]: ./files/Image025.png
-[Img26]: ./files/Image026.jpg
-[Img27]: ./files/Image027.png
-[Img28]: ./files/Image028.jpg
+[Img5]: ./files/image005.png
+[Img6]: ./files/image006.png
+[Img7]: ./files/image007.png
+[Img8]: ./files/image008.jpg
+[Img9]: ./files/image009.png
+[Img10]: ./files/image010.png
+[Img11]: ./files/image011.jpg
+[Img12]: ./files/image012.png
+[Img13]: ./files/image013.jpg
+[Img14]: ./files/image014.png
+[Img15]: ./files/image015.jpg
+[Img16]: ./files/image016.png
+[Img17]: ./files/image017.png
+[Img18]: ./files/image018.jpg
+[Img19]: ./files/image019.png
+[Img20]: ./files/image020.png
+[Img21]: ./files/image021.png
+[Img22]: ./files/image022.jpg
+[Img23]: ./files/image023.png
+[Img24]: ./files/image024.jpg
+[Img25]: ./files/image025.png
+[Img26]: ./files/image026.jpg
+[Img27]: ./files/image027.png
+[Img28]: ./files/image028.jpg
