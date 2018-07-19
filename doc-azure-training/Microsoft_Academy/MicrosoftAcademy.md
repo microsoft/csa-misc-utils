@@ -1,6 +1,8 @@
 
 ### Microsoft Academy
-<a name="overview">__Overview__</a>
+
+
+#### Overview
 
 Link to Microsoft Academy: https://academy.microsoft.com
 
@@ -23,8 +25,10 @@ Most of these courses are developed by Microsoft. If Microsoft did not create th
 Other Azure and Microsoft courses are available on edx.org. You will need a Microsoft account and an edX.org account to take these courses. In the next section we will walk through signing up for these accounts as well as getting started with your first course.
  
 There are Microsoft Professional Program (MPP) Certificates tied to each track for a low cost.  All classes can be audited for free if the Certificate is not needed.  
+
+<a name="signup"></a>
  
-<a name="signup">__Signing up for a Microsoft Account__</a>
+#### Signing up for a Microsoft Account
  
 Signing up for a Microsoft Account is simple and free. If you have a Microsoft Account, you can skip this section. A Microsoft Account is a Hotmail, Live, or Outlook account.
  
@@ -32,43 +36,46 @@ To get started head to https://academy.microsoft.com (Most Microsoft websites ca
  
 In the upper right-hand corner click "Sign In" Should look like this:
 
-![alt text][Img5]
+![alt text](files/image005.png)
  
 You will come to this page:
 
-![alt text][Img6]
+![alt text](files/image006.png)
  
 Click on "Create one!" 
  
 Follow the instruction for creating a new account. Remember the username and password.
 
-<a name="edx">__Signing up for an edX.org account__</a>
+<a name="edx"></a>
+#### Signing up for an edX.org account
  
 To sign up for an edX.org account open a browser and head to https://www.edx.org/
 Find the "Register" button in the upper right-hand corner:
 
- ![alt text][Img7]
+![alt text](files/image007.png)
 
 Look for this button and click on it:
 
-![alt text][Img9]
+![alt text](files/image009.png)
  
 You will come to this page:
 
-![alt text][Img10]
+![alt text](files/image010.png)
 
 With the Facebook, Google, or Microsoft accounts you will need to accept permissions for those accounts to access edX.org. The Microsoft accounts are work or school accounts not the outlook.com consumer account we created in the last section.
  
 You will also need to create an edX.org username. This should not be your full email address. This username will be public on edX.org forums, certificates and linked accounts.
  
-<a name="linking">__Linking accounts (Microsoft and edX)__</a>
+<a name="linking"></a>
+
+####  Linking accounts (Microsoft and edX)
  
 Now that you have a Microsoft account and an edX account you need to link them, so you can track progress in the various courses.
  
   1.    Sign into https://academy.microsoft.com with your Microsoft personal account (Hotmail, Live, or Outlook).
 
           On the home screen you should this bar.
-          ![alt text][Img12]
+          ![alt text](files/image012.png)
 
   2.    Click "Link your edX account"
   3.    Sign into edX with the email and password from the 'Sign up for edX' step. 
@@ -81,54 +88,56 @@ Now that you have a Microsoft account and an edX account you need to link them, 
           iv. Close this browser window and go back to the edX sign-in page for academy.microsoft.com
   5.    Click "Allow" on the next screen. After which you will return to the Microsoft page.
 
-![alt text][Img14]
+![alt text](files/image014.png)
 
-<a name="enrolling">__Enrolling in a Track__</a>
+<a name="enrolling"></a>
+
+#### Enrolling in a Track
 
 Now that you have all the necessary accounts setup lets enroll in a track to begin our journey.
  
 If are not already signed in academy.microsoft.com do so now.
  
 Choose one of the eight (8) tracks to begin training. 
-  1. Cloud Administration 
-  2. Data Science
-  3. Artificial Intelligence
-  4. Big Data 
-  5. DevOps
-  6. Front-End Web Development
-  7. Entry Level Software Development
-  8. IT Support
+ 1. [Cloud Administration](https://academy.microsoft.com/en-us/professional-program/tracks/cloud-administration/)
+ 2. [Data Science](https://academy.microsoft.com/en-us/professional-program/tracks/data-science/) 
+ 3. [Artificial Intelligence](https://academy.microsoft.com/en-us/professional-program/tracks/artificial-intelligence/)
+ 4. [Big Data](https://academy.microsoft.com/en-us/professional-program/tracks/big-data/) 
+ 5. [DevOps](https://academy.microsoft.com/en-us/professional-program/tracks/devops/)
+ 6. [Front-End Web Development](https://academy.microsoft.com/en-us/professional-program/tracks/front-end-development/)
+ 7. [Entry Level Software Development](https://academy.microsoft.com/en-us/professional-program/tracks/entry-level-software-development/)
+ 8. [IT Support](https://academy.microsoft.com/en-us/professional-program/tracks/it-support/)
  
 For the rest of this demo we will focus on "Cloud Administration". The other tracks follow the same pattern. 
  
   1. Find the track you wish to enroll in. Click the "Enroll now" button
 
-        ![alt text][Img16]
+        ![alt text](files/image016.png)
 
   2. You should see a screen like this based on the track you chose.
 
-        ![alt text][Img17]
+        ![alt text](files/image017.png)
   
   3. Click the "view track details" on the track card
 
-        ![alt text][Img19]
+        ![alt text](files/image019.png)
 
   4. You should now see list of the required to complete this track. Courses do not have to be completed in order. Click "Get Started" on the first course.
 
-        ![alt text][Img20]
-        ![alt text][Img21]
+        ![alt text](files/image020.png)
+        ![alt text](files/image021.png)
 
   5. Click "Ok" on the "Go to course" screen
 
-        ![alt text][Img23]
+        ![alt text](files/image023.png)
 
   6. Select "Enroll Now" on the course home page
 
-        ![alt text][Img25]
+        ![alt text](files/image025.png)
 
   7. Choose the course experience. The course and materials are the same for both. The only difference is the Certificate at the end of the course and at the end of the track.
 
-        ![alt text][Img27]
+        ![alt text](files/image027.png)
 
 
   8. Congratulations, you have enrolled in your first course. A few items of note for each course:
@@ -137,3 +146,4 @@ For the rest of this demo we will focus on "Cloud Administration". The other tra
       c. There is a mobile app for edX. It is very useful for watching and reading content offline.
  
 ### Good Luck and Enjoy!!!
+
