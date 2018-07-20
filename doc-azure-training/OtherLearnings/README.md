@@ -6,7 +6,7 @@
 
 Link to [Cloud Simplfied](https://www.youtube.com/channel/UCwDoMq6rNGsU4aIQYhCnWpA)
 
-##### Description
+##### Description From Channel
 
 So why another site devoted to cloud computing in Azure?  There are many dedicated sites, YouTube channels and blogs devoted to specific capabilities in Azure such as using Premium Storage with your VMs to allow them to have higher throughput and using vnet peering to connect two virtual networks in Azure but we decided to take a different approach — focusing on _how_ to use these features to practically solve business problems! 
 
@@ -17,7 +17,7 @@ In our role at Microsoft as Cloud Solution Architects (CSA) serving customers al
 
 Link to [Guy in a Cube](https://www.youtube.com/channel/UCFp1vaKzpfvoGai0vE5VJ0w)
 
-##### Description
+##### Description From Channel
 
 Guy in a Cube is all about helping you master business analytics on the Microsoft Business analytics stack to allow you to drive business growth. We are just two guys that do the work.
 
