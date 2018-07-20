@@ -19,7 +19,7 @@
    - [Cloud AI Bootcamp](./Data_and_AI#learnaibootcamp)
  - [IoT Training](./IoT#iottraining)
    - [Microsoft IoT School](./IoT#iotschool)
-  - [Other Learning Resources](./otherlearnings)
+  - [Other Learning Resources](./OtherLearnings#)
 
 <a name="intro">__Introduction__</a>
 
