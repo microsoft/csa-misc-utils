@@ -1,4 +1,4 @@
-
+<a name="academy"></a>
 ### Microsoft Academy
 
 
@@ -82,10 +82,10 @@ Now that you have a Microsoft account and an edX account you need to link them, 
  
   4.    Click "Sign in"
       a.  Note: If you have not activated your edX account you may get this error screen. 
-          i.  Leave this browser window open. 
-          ii. Open a new browser window. 
-          iii. Check your email that you signed up with and follow the activation instructions. 
-          iv. Close this browser window and go back to the edX sign-in page for academy.microsoft.com
+          1.  Leave this browser window open. 
+          2. Open a new browser window. 
+          3. Check your email that you signed up with and follow the activation instructions. 
+          4. Close this browser window and go back to the edX sign-in page for academy.microsoft.com
   5.    Click "Allow" on the next screen. After which you will return to the Microsoft page.
 
 ![alt text](files/image014.png)
