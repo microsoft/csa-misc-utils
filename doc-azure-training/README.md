@@ -3,9 +3,9 @@
 <a name="contents">__Contents__</a>
 
 - [Introduction](#intro)
-- [Microsoft Academy](./Data_and_AI#)
+- [Microsoft Academy](./Microsoft_Academy#academy)
    - [Signing up for Training](./Microsoft_Academy#signup)
-   - [Tracks](#academy)
+   - [Tracks](./Microsoft_Academy#tracks)
      - [Cloud Administration](https://academy.microsoft.com/en-us/professional-program/tracks/cloud-administration/)
      * [Data Science](https://academy.microsoft.com/en-us/professional-program/tracks/data-science/) 
      * [Artificial Intelligence](https://academy.microsoft.com/en-us/professional-program/tracks/artificial-intelligence/)
@@ -14,11 +14,11 @@
      * [Front-End Web Development](https://academy.microsoft.com/en-us/professional-program/tracks/front-end-development/)
      * [Entry Level Software Development](https://academy.microsoft.com/en-us/professional-program/tracks/entry-level-software-development/)
      * [IT Support](https://academy.microsoft.com/en-us/professional-program/tracks/it-support/) 
- - [Data and AI Training](#dataandai)
-   - [Microsoft AI School](#aischool)
-   - [Cloud AI Bootcamp](#learnaibootcamp)
- - [IoT Training](#iottraining)
-   - [Microsoft IoT School](#iotschool)
+ - [Data and AI Training](./Data_and_AI#)
+   - [Microsoft AI School](./Data_and_AI#aischool)
+   - [Cloud AI Bootcamp](./Data_and_AI#learnaibootcamp)
+ - [IoT Training](./IoT#iottraining)
+   - [Microsoft IoT School](./IoT#iotschool)
 
 <a name="intro">__Introduction__</a>
 
