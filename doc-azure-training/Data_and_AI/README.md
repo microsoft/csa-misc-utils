@@ -1,7 +1,7 @@
-### Data and AI Trainings
+## Data and AI Trainings
 <a name="dataandai"></a>
 
-#### Training 1. 
+### Training 1
 #### Microsoft AI School
 <a name="aischool"></a>
 Link to [Microsoft AI School](http://aischool.microsoft.com) - http://aischool.microsoft.com
@@ -22,7 +22,7 @@ Courses can be made up of multiple modules. Progress on a course or all the cour
  
 Courses are free of charge but the resources for the course are the responsibility of the person taking the course. 
  
-#### Training 2
+### Training 2
 
 #### Cloud AI Bootcamp 
 <a name="learnaibootcamp"></a>
