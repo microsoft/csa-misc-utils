@@ -3,7 +3,7 @@
 <a name="contents">__Contents__</a>
 
 - [Introduction](#intro)
-- [Microsoft Academy](./Microsoft_Academy#academy)
+- [Microsoft Academy](MicrosoftAcademy#academy)
    - [Signing up for Training](./Microsoft_Academy#signup)
    - [Tracks](./Microsoft_Academy#tracks)
      - [Cloud Administration](https://academy.microsoft.com/en-us/professional-program/tracks/cloud-administration/)
