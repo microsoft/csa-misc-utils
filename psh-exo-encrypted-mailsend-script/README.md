@@ -25,7 +25,7 @@ There are two approaches to accomplishing this:
     2.	The script authenticates as the user, using the password grant type. It calls https://graph.microsoft.com/v1.0/me/sendMail
 
 Setting up the mail flow rules requires someone to access the Exchange Admin console. Here's an example of a resulting encryption rule:
-![alt text](files/mail-flow-rules.png)
+![alt text](Files/mail-flow-rules.png)
 
 <hr>
 Here’s the REST reference:
