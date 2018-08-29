@@ -17,15 +17,20 @@ There are two approaches to accomplishing this:
     1.  Assign it Application permissions to the Microsoft Graph API, allowing it to send email impersonating anyone in the org (this requires GA approval)
 
     2.	The script authenticates as the application, using the client_credential grant type. It calls https://graph.microsoft.com/v1.0/users/{0}/sendMail, filling in the UPN of the sending account mailbox.
-    
+
 *	Case B – Sending AS the user
     
     1.  Assign it delegated permissions to the Microsoft Graph API, allowing it to send on behalf of the logged-in user (doesn’t require admin approval)
 
     2.	The script authenticates as the user, using the password grant type. It calls https://graph.microsoft.com/v1.0/me/sendMail
 
+Setting up the mail flow rules requires someone to access the Exchange Admin console. Here's an example of a resulting encryption rule:
+![alt text](files/mail-flow-rules.png)
+
+<hr>
 Here’s the REST reference:
 https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_sendmail
 
 Here’s the EXO mail flow encryption doc:
 https://docs.microsoft.com/en-us/office365/securitycompliance/define-mail-flow-rules-to-encrypt-email
+
