@@ -12,15 +12,16 @@ There are two approaches to accomplishing this:
     
     b.	Create an app registration. Get the AppID and create an app secret
     
-    c.	Case A - Assign it Application permissions to the Microsoft Graph, allowing it to send email on behalf of anyone in the org (This requires GA approval.)
-    
-    d.	Case B – Assign it delegated permissions to the Microsoft Graph, allowing it to send on behalf of the logged-in user (Doesn’t require admin approval.)
 2.	Case A – Sending on behalf of this user
     
-    a.	The script authenticates in as the application, using the client_credential grant type. It calls https://graph.microsoft.com/v1.0/users/{0}/sendMail, filling in the UPN of the sending account mailbox.
+    a.  Assign it Application permissions to the Microsoft Graph API, allowing it to send email impersonating anyone in the org (this requires GA approval)
+
+    b.	The script authenticates as the application, using the client_credential grant type. It calls https://graph.microsoft.com/v1.0/users/{0}/sendMail, filling in the UPN of the sending account mailbox.
 3.	Case B – Sending AS the user
     
-    a.	The script authenticates in as the user, using the password grant type. It calls https://graph.microsoft.com/v1.0/me/sendMail
+    a.  Assign it delegated permissions to the Microsoft Graph API, allowing it to send on behalf of the logged-in user (doesn’t require admin approval)
+
+    b.	The script authenticates as the user, using the password grant type. It calls https://graph.microsoft.com/v1.0/me/sendMail
 
 Here’s the REST reference:
 https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_sendmail
