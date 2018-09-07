@@ -1,5 +1,31 @@
 ## Other Learning Resources
 
+### Quick Start Azure Training
+
+### Azure Essentials (Pluralsight)
+
+Link to [Azure Essentials](https://aka.ms/Hvyrqt)
+
+#### Description
+
+The simplest way to learn Azure
+- Watch, Learn, and Try with Microsoft Azure Essentials
+- Jump start your Azure learning. With Azure Essentials, you can:
+- Learn Azure technologies in under an hour
+- Access free Pluralsight courses and Quickstarts
+- Track your learning progress
+- Master the skills you need for cloud roles
+
+### Channel 9 Shows
+
+### Azure Friday
+
+Link to [Azure Friday](https://channel9.msdn.com/Shows/Azure-Friday)
+
+#### Description
+
+This is the longest running video blog on Azure and has a very large audience. It's great for "what's new and cool" kind of content.
+
 ### Microsoft Youtube Channels
 
 ### Cloud Simplified
@@ -8,7 +34,7 @@ Link to [Cloud Simplfied](https://www.youtube.com/channel/UCwDoMq6rNGsU4aIQYhCnW
 
 ##### Description From Channel
 
-So why another site devoted to cloud computing in Azure?  There are many dedicated sites, YouTube channels and blogs devoted to specific capabilities in Azure such as using Premium Storage with your VMs to allow them to have higher throughput and using vnet peering to connect two virtual networks in Azure but we decided to take a different approach — focusing on _how_ to use these features to practically solve business problems! 
+So why another site devoted to cloud computing in Azure?  There are many dedicated sites, YouTube channels and blogs devoted to specific capabilities in Azure such as using Premium Storage with your VMs to allow them to have higher throughput and using vnet peering to connect two virtual networks in Azure but we decided to take a different approach â€” focusing on _how_ to use these features to practically solve business problems! 
 
 In our role at Microsoft as Cloud Solution Architects (CSA) serving customers all across the US, we have a unique perspective on what customers need to accomplish in the cloud and we work to help them complete their journey successfully meeting their performance, budgetary and reliability requirements.  We decided to take that tribal knowledge and provide meaningful content to the community on how we addressed specific requirements to bring workloads to the cloud after all, Knowledge is Power!
 
