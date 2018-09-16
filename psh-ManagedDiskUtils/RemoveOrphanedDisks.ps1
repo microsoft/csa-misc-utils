@@ -54,8 +54,7 @@ Param(
 Write-Host "Log in to your Azure subscription..." -ForegroundColor Green
 #Login-AzureRmAccount
 #Get-AzureRmSubscription -SubscriptionName $SubscriptionName | Select-AzureRmSubscription
-#Set-AzureRmContext -SubscriptionId $SubscriptionId
-#Set-AzureRmContext -SubscriptionId ae7ea058-b5a7-44c2-91cf-ac6ee0389448 
+
 
 # =======================================================================================
 # Functions
@@ -69,7 +68,7 @@ Function Message ($caption, $message) {
     Write-Output $answer
 }
 
-Function FindOrphanedDisks ($ResGroup) {    
+Function FindOrphanedDisks ($ResGroup) {  1  
         
     Write-Host ""
     Write-Host "Obtaining list of disks your VMs are currently using..." -ForegroundColor Yellow
