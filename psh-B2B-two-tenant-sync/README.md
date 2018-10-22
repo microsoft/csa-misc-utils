@@ -1,4 +1,4 @@
-# Sync Azure AD B2B Guests to between tenants
+# Sync Azure AD B2B Guests between tenants
 
 ## Overview
 
