@@ -103,7 +103,7 @@ function Get-B2CUserByExtAttr {
         [object]$Value
     )
 
-    $attr = GetAttr($Attribute)
+    $attr = Get-Attr($Attribute)
 
     $url = Get-GraphUrl -UrlFunction "users" -Filter "$($attr.name) eq '$Value'"
     $list = Invoke-WebRequest -Uri $url -Method Get -Headers $Headers -ErrorVariable Failed -ErrorAction SilentlyContinue
@@ -123,7 +123,7 @@ function Get-Attr {
         [string]$Attribute
     )
     if ($Extensions.Count -eq 0) {
-        $Extensions = GetExtensions
+        $Extensions = Get-Extensions
     }
 
     $attr = @{}
@@ -149,9 +149,9 @@ function Set-CustomUserAttr {
         [Parameter(Mandatory=$true)]
         [object]$Value
     )
-    $attr = GetAttr($Attribute)
+    $attr = Get-Attr($Attribute)
     
-    $B2CUser = GetB2CLocalUser -SignInId $Login
+    $B2CUser = Get-B2CLocalUser -SignInId $Login
 
     $url = "https://graph.windows.net/$Tenant/users/$($B2CUser.userPrincipalName)?api-version=1.6"
     $message = @{
@@ -179,7 +179,7 @@ function Set-UserAttr {
         [Parameter(Mandatory=$true)]
         [object]$Value
     )
-    $B2CUser = GetB2CLocalUser -SignInId $Login
+    $B2CUser = Get-B2CLocalUser -SignInId $Login
 
     $url = "https://graph.windows.net/$Tenant/users/$($B2CUser.userPrincipalName)?api-version=1.6"
     $message = @{
