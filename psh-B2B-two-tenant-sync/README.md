@@ -5,9 +5,9 @@
 Sample script to create B2B guests in a subsidiary/remote/destination Azure AD tenant, synchronized from
 users in specific group of a corp/source tenant.
 
-* Will ensure Users from tenant 2 are guests in tenant 1, in the same group
-* Will ensure that Users removed from the group in tenant 2 are removed as guests from tenant 1
-
+* Will ensure designated users from the source tenant are invited to the destination, also in a related group
+* Will ensure that users removed from the source group are removed from the destination group and optionally, the destination tenant
+ 
 ## Configuration
 
 1. Create app registration in destination tenant (use "http://[tenant domain name]/groupsynctool" for the URL)
