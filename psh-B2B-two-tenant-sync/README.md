@@ -5,16 +5,8 @@
 Sample script to create B2B guests in a subsidiary/remote/destination Azure AD tenant, synchronized from
 users in specific group of a corp/source tenant.
 
-and a separate list of User accounts in a specific group of a 2nd Azure AD tenant
-
 * Will ensure Users from tenant 2 are guests in tenant 1, in the same group
 * Will ensure that Users removed from the group in tenant 2 are removed as guests from tenant 1
-
-This is used to synchronize users in a "source" corp tenant (tenant 2) as B2B guests in a 
-separate "destination" tenant (tenant 1).
-
-	
-To enable this process, a multi-tenanted application registration will be created in tenant 2 (the destination tenant)
 
 ## Configuration
 
@@ -71,6 +63,33 @@ __Run Sync__
 
 Now that all of that's done, you can run "B2BSync.ps1" for the first time. It will gather an in-memory collection of users from the source group, then it will gather an in-memory collection of B2B guests from the destination group (if any). It will then compare the two lists and add users from the source group as guests in the destination tenant, then add them to the destination group, then send the invitation email. It will then check the other direction and see if any users are in the destination group that are NOT in the source group. It will remove them from the destination group, then IF the $RemoveUser variable set above is $true, it will also remove them as guests from the destination tenant.
 
+__Scheduling__
 
+Once you're satisfied that the process is doing what you want, consider creating a job to run the process on a regular schedule.
+
+__Resources__
+
+* Azure AD B2B
+
+	https://docs.microsoft.com/en-us/azure/active-directory/b2b/what-is-b2b
+
+* Azure AD Graph API
+
+	https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-operations-overview
+
+* Schema Extensions
+
+	https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-directory-schema-extensions?f=255&MSPPError=-2147217396
+	
+* Microsoft Graph API
+
+	https://developer.microsoft.com/en-us/graph/docs/concepts/best-practices-concept
+
+* Azure AD App Registrations
+
+	https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v1-add-azure-ad-app
+
+* Azure Automation
+	https://docs.microsoft.com/en-us/azure/automation/automation-intro
 
 
