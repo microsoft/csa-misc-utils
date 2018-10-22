@@ -90,6 +90,7 @@ __Resources__
 	https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v1-add-azure-ad-app
 
 * Azure Automation
+
 	https://docs.microsoft.com/en-us/azure/automation/automation-intro
 
 
