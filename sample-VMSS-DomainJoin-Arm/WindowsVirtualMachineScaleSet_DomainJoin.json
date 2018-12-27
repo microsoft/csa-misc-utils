@@ -159,8 +159,7 @@
             "extensions": [
               {
                 "type": "Microsoft.Compute/virtualMachines/extensions",
-                "name": "[concat(parameters('vmssName'),'/joindomain')]",
-                "apiVersion": "2016-03-30",
+                "name": "VMSSDomainJoin",
                 "location": "[resourceGroup().location]",
                 "properties": {
                   "publisher": "Microsoft.Compute",
