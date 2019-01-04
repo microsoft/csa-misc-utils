@@ -37,7 +37,7 @@ while ($true) {
     $sourceQ.DeleteMessage($srcMsg)
     $count++
     $donepercent = [int](($count / $toProcess) * 100)
-    Write-Progress -Activity "Moving items..." -PercentComplete $donepercent -Status "$($donepercent)% complete ($count of $toProcess)"
+    Write-Progress -Activity "Moving items..." -PercentComplete $donepercent -Status "$($donepercent)% complete ($count of $toProcess)" -ErrorAction Ignore
 }
 ""
 "$count messages restored"
