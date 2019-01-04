@@ -1,0 +1,187 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmSku": {
+      "type": "string",
+      "defaultValue": "Standard_F32s_v2",
+      "metadata": {
+        "description": "Size of VMs in the VM Scale Set."
+      }
+    },
+    "vmssName": {
+      "type": "string",
+      "metadata": {
+        "description": "Unique name for the scale set. Must be 3-61 characters in length and unique across the VNet."
+      },
+      "maxLength": 9
+    },
+    "instanceCount": {
+      "type": "int",
+      "metadata": {
+        "description": "Number of VM instances (100 or less)."
+      },
+      "defaultValue": 1,
+      "maxValue": 100
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Admin username on all VMs."
+      },
+      "defaultValue": "someuser"
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin password on all VMs."
+      },
+      "defaultValue": "@@SomePassword"
+    },
+    "existingVnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "vName of the existing virtual network to deploy the scale set into."
+      },
+      "defaultValue": "ExistingVnet"
+    },
+    "existingSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the existing subnet to deploy the scale set into."
+      },
+      "defaultValue": "Dynamic"
+    },
+    "existingNetworkResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Group Name of the existing Subnet."
+      },
+      "defaultValue": "ExistingVnet_RG"
+    },
+    "existingManagedImageResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Resource Group containing the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
+      },
+      "defaultValue": "ExistingVnet_RG"
+    },
+    "existingManagedImageName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Image that instances of the VM Scale Set will be created from. Images can be created by capturing Azure VMs."
+      },
+      "defaultValue": "VMSS_NewImage"
+    },
+    "domainToJoin": {
+      "type": "string",
+      "metadata": {
+        "description": "The FQDN of the AD domain"
+      }
+    },
+    "domainUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Username of the account on the domain"
+      }
+    },
+    "domainPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password of the account on the domain"
+      }
+    },
+    "ouPath": {
+      "defaultValue": "",
+      "type": "string",
+      "metadata": {
+        "description": "Specifies an organizational unit (OU) for the domain account. Enter the full distinguished name of the OU in quotation marks. Example: 'OU=testOU; DC=domain; DC=Domain; DC=com"
+      }
+    },
+    "domainJoinOptions": {
+      "defaultValue": 3,
+      "type": "int",
+      "metadata": {
+        "description": "Set of bit flags that define the join options. Default value of 3 is a combination of NETSETUP_JOIN_DOMAIN (0x00000001) & NETSETUP_ACCT_CREATE (0x00000002) i.e. will join the domain and create the account on the domain. For more information see https://msdn.microsoft.com/en-us/library/aa392154(v=vs.85).aspx"
+      }
+    }
+  },
+  "variables": {
+    "managedImageId": "[resourceId(parameters('existingManagedImageResourceGroup'), 'Microsoft.Compute/images', parameters('existingManagedImageName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "name": "[parameters('vmssName')]",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2018-04-01",
+      "sku": {
+        "name": "[parameters('vmSku')]",
+        "capacity": "[parameters('instanceCount')]"
+      },
+      "properties": {
+        "overprovision": "false",
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "id": "[variables('managedImageId')]"
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "[parameters('vmssName')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPassword')]"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "nic",
+                "properties": {
+                  "primary": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "ipconfig",
+                      "properties": {
+                        "subnet": {
+                          "id": "[concat('/subscriptions/', subscription().subscriptionId,'/resourceGroups/', parameters('existingNetworkResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('existingVnetName'), '/subnets/', parameters('existingSubNetName'))]"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "type": "Microsoft.Compute/virtualMachines/extensions",
+                "name": "VMSSDomainJoin",
+                "location": "[resourceGroup().location]",
+                "properties": {
+                  "publisher": "Microsoft.Compute",
+                  "type": "JsonADDomainExtension",
+                  "typeHandlerVersion": "1.3",
+                  "autoUpgradeMinorVersion": true,
+                  "settings": {
+                    "Name": "[parameters('domainToJoin')]",
+                    "User": "[parameters('domainUsername')]",
+                    "Restart": "true",
+                    "Options": "[parameters('domainJoinOptions')]",
+                    "OUPath": "[parameters('ouPath')]"
+                  },
+                  "protectedSettings": {
+                    "Password": "[parameters('domainPassword')]"
+                  }
+                }
+              }
+             ]
+            }
+          }
+        }
+    }
+  ]
+}
