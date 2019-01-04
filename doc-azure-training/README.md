@@ -3,29 +3,37 @@
 <a name="contents">__Contents__</a>
 
 - [Introduction](#intro)
-- [Microsoft Academy](./MicrosoftAcademy.md#academy)
-   - [Signing up for Training](./MicrosoftAcademy.md#signup)
-   - [Tracks](./MicrosoftAcademy.md#tracks)
-     - [Cloud Administration](https://academy.microsoft.com/en-us/professional-program/tracks/cloud-administration/)
-     * [Data Science](https://academy.microsoft.com/en-us/professional-program/tracks/data-science/) 
-     * [Artificial Intelligence](https://academy.microsoft.com/en-us/professional-program/tracks/artificial-intelligence/)
-     * [Big Data](https://academy.microsoft.com/en-us/professional-program/tracks/big-data/) 
-     * [DevOps](https://academy.microsoft.com/en-us/professional-program/tracks/devops/)
-     * [Front-End Web Development](https://academy.microsoft.com/en-us/professional-program/tracks/front-end-development/)
-     * [Entry Level Software Development](https://academy.microsoft.com/en-us/professional-program/tracks/entry-level-software-development/)
-     * [IT Support](https://academy.microsoft.com/en-us/professional-program/tracks/it-support/) 
- - [Data and AI Training](./Data_and_AI_Training.md#)
+- [Microsoft Learn](./MicrosoftLearn.md#mslearn)
+- [Data and AI Training](./Data_and_AI_Training.md#)
    - [Microsoft AI School](./Data_and_AI_Training.md#aischool)
    - [Cloud AI Bootcamp](./Data_and_AI_Training.md#learnaibootcamp)
  - [IoT Training](./IoT_Training.md#iottraining)
    - [Microsoft IoT School](./IoT_Training.md#iotschool)
   - [Other Learning Resources](./OtherResources.md#)
 
+
 <a name="intro">__Introduction__</a>
 
-Welcome to the "Getting Started with Azure Online Training" repo. This repo is designed to help you get started training on Azure fast. This is not all the training available. These trainings are self-paced, MOOC style courses. The courses listed here are what we see customer looking for as part of their digitial transformation. 
+Welcome to the updated "Getting Started with Azure Online Training" repo. This repo is designed to help you get started training on Azure fast. This is not a comprensive list. The courses listed here are what we see customer looking for as part of their digitial transformation. 
 
-If you are new to Azure then we would suggest starting with [Microsoft Academy](./MicrosoftAcademy.md#academy). Microsoft Academy is great place for learning the basics of Cloud. If you are an Apps or Infrastructure person start with "Cloud Administration". If you are a data, analytics, or BI person then we still suggest some of the courses of "Cloud Administration", then head quickly over to "Data Science" or "Big Data" to feel more at home.
+The prior version of this repo targeted Microsoft Academy. On January 31, 2019, Microsoft Academy will be shut down. 
+
+The good news we have a much better replacement. [Microsoft Learn](https://docs.microsoft.com/en-us/learn/)
+
+[Microsoft Learn](https://docs.microsoft.com/en-us/learn/) fills in a couple of the gaps this repo and Microsoft Academy possessed.
+1. __Learning Paths__. Learning Path are a pre-defined group of modules. If you are new to Azure or want to learn the basics we have an Azure 101. If you are looking to build a MEAN stack or bot we have paths for both.
+2. __Role Based__ Micrsoft Learn also has role based learning paths. This has been requested by many customers for this site but was not something I was able to accomplish. Now Microsoft Learn has 5 roles for learning Azure. Each area is targeted to learning the services and configureations you may interact with in your role.
+   1. Administrator
+   2. Business Analyst
+   3. Business User
+   4. Developer
+   5. Solution Architect
+
+3. __Hands-on__ Microsoft Learn has hands-on modules designed for trying something new in Azure. 
+
+We still have the growing list of other learning and training resources. Take a look at our Data, IoT and Other pages for more information.
+
+Another new annoucement is Ask an Azure Advisor on Slack. This is a place where fellow Azure professional can interact. This is much like a 24/7 Virtual User Group. Visit https://askazure.io/ to get started. 
 
 We encourage you to watch or star this repo as more content/ training offerings will be added overtime. Feel free to even fork this repo for your own organization's github.
 
