@@ -3,7 +3,7 @@
 <a name="contents">__Contents__</a>
 
 - [Introduction](#intro)
-- [Microsoft Learn](./MicrosoftLearn.md#mslearn)
+- [Microsoft Learn](./MicrosoftLearn.md#)
 - [Data and AI Training](./Data_and_AI_Training.md#)
    - [Microsoft AI School](./Data_and_AI_Training.md#aischool)
    - [Cloud AI Bootcamp](./Data_and_AI_Training.md#learnaibootcamp)
