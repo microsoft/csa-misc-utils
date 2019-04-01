@@ -35,6 +35,10 @@ __Step 3:__
 
 ## Notes
 
+* When remapping RBAC from a source tenant to a destination tenant for a subscription, the script checks for matching ImmutableId or mail attributes
+https://github.com/Microsoft/csa-misc-utils/blob/master/psh-RBAC-CopyPaste/ApplyRBAC.ps1#L30. Make sure you test and validate that these matching rules 
+will work for your scenario. Two possible areas to consider are (1) B2B guests that exist in both tenants, and (2) on-prem identities that were 
+previously syncing to the source tenant, but will be moved (along with their validated domain names) to sync to the destination tenant.
 * Consider creating Management Group root roles in the destination tenant so admins can immediately gain access 
 in the new directory.
 * For managed service accounts: If you move a subscription to another directory, you will have to manually 
