@@ -33,6 +33,8 @@ foreach($sp in $SourceSPs) {
         "AppObjectId" = $servicePrincipal.App.ObjectId
         "ServicePrincipalNames" = $servicePrincipal.SP.ServicePrincipalNames
         "ClearPassword" = $servicePrincipal.ClearPW
+        "SourceAppId" = $sp.AppId
+        "SourceObjectId" = $sp.ObjectId
     }
     $count++
 }
