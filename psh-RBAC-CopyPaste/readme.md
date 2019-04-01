@@ -45,3 +45,5 @@ in the new directory.
 re-create them and grant Azure RBAC role assignments again.
    * For system assigned managed identities: disable and re-enable.
    * For user assigned managed identities: delete, re-create and attach them again to the necessary resources (e.g. virtual machines)
+* If you get an error on line 77 (assigning the roles) when running ApplyRBAC.ps1, be sure that the login includes your access to the subscription, 
+now in the destination tenant. You can verify this by inspecting the $ctx variable after line 7 to verify that the Subscription column is populated.
