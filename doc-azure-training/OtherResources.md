@@ -54,3 +54,27 @@ MONDAY: Information round up and occasional Q&A with folks in the organization.
 TUESDAY & WEDNESDAY: Tech videos relating to Power BI and other products and services.
 
 *** Adam Saxton and Patrick LeBlanc are Microsoft Employees ***
+
+### Blogs
+
+### Pixelrobots.co.uk
+
+A set of study resources for Azure exams. Most link to Microsoft Docs site.
+
+Link to [AZ-102](https://pixelrobots.co.uk/2018/07/study-resources-for-the-az-102-microsoft-certified-azure-administrator/)
+
+Link to [AZ-103](https://pixelrobots.co.uk/2019/03/study-resources-for-the-az-103-microsoft-certified-azure-administrator/)
+
+Link to [AZ-300](https://pixelrobots.co.uk/2018/09/study-resources-for-the-az-300/)
+
+Link to [AZ-301](https://pixelrobots.co.uk/2018/10/study-resources-for-the-az-301/)
+
+Link to [AZ-500](https://pixelrobots.co.uk/2019/03/study-resources-for-the-az-500-microsoft-certified-azure-security-engineer/)
+
+### gregorsuttie.com
+
+A set of study resources for Azure exams. Most link to Microsoft Docs site.
+
+Link to [AZ-302](https://gregorsuttie.com/2019/01/10/az-302-exam-study-notes/)
+
+Link to [AZ-400](https://gregorsuttie.com/2018/10/27/azure-devops-az-400-exam-study-notes/)
