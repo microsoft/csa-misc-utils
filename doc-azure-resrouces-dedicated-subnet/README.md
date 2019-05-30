@@ -1,5 +1,5 @@
 <h3>List of Azure Services that require a dedicated subnet</h3>
-The following services can be deployed on a VNet but require a Subnet that cannot have any other Azure resource consiming the subnet private IPs. The minimum size for a Subnet in Azure is /29 whih provides 8 IP Addresses. However, Azure reserves some IP addresses within each subnet. The first and last IP addresses of each subnet are reserved for protocol conformance, along with the x.x.x.1-x.x.x.3 addresses of each subnet, which are used for Azure services.<br/><br/>
+The following services can be deployed on a VNet but require a Subnet that cannot have any other Azure resource consiming the subnet private IPs. The minimum size for a Subnet in Azure is /29 which provides 8 IP Addresses. However, Azure reserves some IP addresses within each subnet. The first and last IP addresses of each subnet are reserved for protocol conformance, along with the x.x.x.1-x.x.x.3 addresses of each subnet, which are used for Azure services.<br/><br/>
 <table>
 <tr>
 <th>Service</th>
