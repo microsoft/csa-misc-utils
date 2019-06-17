@@ -3,7 +3,7 @@
 
 Managed disks in Azure have no direct facilitites to access the underlying URL/path the disk resides in since 
 they are placed into storage accounts under the hood by Azure.  Often times there's a desire to take a generalized VM
-from one VM and move to another region -- this script provides a mechanism to do this.
+image from one region and move to another region -- this script provides a mechanism to do this.
 
 .DESCRIPTION
 
