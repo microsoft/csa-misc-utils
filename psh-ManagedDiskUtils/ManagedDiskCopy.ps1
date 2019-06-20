@@ -36,6 +36,7 @@ $stagingstorageaccountContainer = 'vhds'
 $destResourceGroup = 'DestRG'
 $destlocation = 'East US'
 $storageType = 'Premium_LRS'
+$OSType = 'Windows'
 
 #get a reference to the source disk, generate a temporary SAS to allow us to copy and begin a copy operation
 $managedDisk= Get-azDisk -ResourceGroupName $resourcegroupname -DiskName $managedDiskName
@@ -57,7 +58,7 @@ $subid = (Get-azContext).Subscription.id
 $sourceVHDURI = $deststorageaccount.Context.BlobEndPoint + "/" + $stagingstorageaccountContainer + "/" + $stagingdiskname
 $storageAccountId = '/subscriptions/' +$subid + '/resourceGroups/' + $destResourceGroup + '/providers/Microsoft.Storage/storageAccounts/' + $stagingstorageaccountname
 
-$diskConfig = new-azdiskconfig -AccountType $storageType -Location $destlocation -CreateOption Import -StorageAccountId $storageAccountId -SourceUri $sourceVHDURI
+$diskConfig = new-azdiskconfig -AccountType $storageType -Location $destlocation -CreateOption Import -StorageAccountId $storageAccountId -SourceUri $sourceVHDURI -OsType $OSType
 New-azDisk -Disk $diskConfig -ResourceGroupName $destResourceGroup -DiskName $managedDisk.Name
 
 #release the SAS access token as each disk can only have one and it prevents some operations from occuring on the source disk while active
