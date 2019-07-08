@@ -1,0 +1,24 @@
+{
+  "Name": "Digital Security",
+  "IsCustom": true,
+  "Description": "Allows for security engineering functions related to Azure environments.",
+  "Actions": [
+    "*/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/write",
+    "Microsoft.Storage/storageaccounts/write",
+    "Microsoft.resources/deployments/*",
+    "Microsoft.EventHub/namespaces/eventhubs/*"
+  ],
+  "NotActions": [
+
+  ],
+  "DataActions": [
+
+  ],
+  "NotDataActions": [
+
+  ],
+  "AssignableScopes": [
+    "/subscriptions/00000000-0000-0000-0000-000000000000"
+  ]
+}

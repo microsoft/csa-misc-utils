@@ -1,0 +1,23 @@
+{
+  "policyRule": {
+    "if": {
+      "not": {
+        "field": "location",
+        "in": [
+          "eastus",
+          "eastus2",
+          "westus",
+          "westus2",
+          "westeurope"
+        ]
+      }
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters": {},
+  "metadata": {
+    "category": "Build"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "policyRule": {
+    "if": {
+      "anyOf": [
+        {
+          "source": "action",
+          "like": "Microsoft.Network/PublicIPAddresses/*"
+        }
+      ]
+    },
+    "then": {
+      "effect": "audit"
+    }
+  },
+  "parameters": {},
+  "metadata": {
+    "category": "Network"
+  }
+}
