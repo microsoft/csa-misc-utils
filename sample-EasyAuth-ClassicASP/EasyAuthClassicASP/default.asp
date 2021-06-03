@@ -18,6 +18,7 @@
         }
         th, td {
             padding:3px;
+			font-size:.9em;
         }
     </style>
 </head>
@@ -64,7 +65,7 @@
         <%Next%>
         </table>
     
-        <% 'Response.Write(WriteServerVariables()) %>
+        <% 'WriteServerVariables() %>
 
     </div>
 </body>

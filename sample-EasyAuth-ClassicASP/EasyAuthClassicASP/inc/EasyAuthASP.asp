@@ -88,7 +88,7 @@ Function WriteServerVariables()
     Response.Write("<table>")
     For Each x in Request.ServerVariables
         Response.Write("<tr>")
-        Response.Write("<td>" & x & "</td>")
+        Response.Write("<td width='20%'>" & x & "</td>")
         Response.Write("<td>" & Request.ServerVariables(x) & "</td>")
         Response.Write("</tr>")
     Next
@@ -135,6 +135,9 @@ function SetSession(){
           Session(x)=claims[x];
       }
     }
+
+    //add DB calls, grab additional info, add to session here
+
     Session("Authenticated")="true";
 }
 function CallMe() {
