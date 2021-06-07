@@ -10,7 +10,7 @@ certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
 colorama==0.4.1
-cryptography==2.5
+cryptography==3.2
 grpcio==1.14.2
 grpcio-tools==1.14.2
 idna==2.8
