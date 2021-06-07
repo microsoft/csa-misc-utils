@@ -4,6 +4,9 @@ This is a hacked-up PoC showing how Classic ASP can take advantage of the Easy A
 Easy Auth makes the id_token from Azure AD available in a header after authentication; this parses the token
 (App Services will have already validated it and logged you in), and sets the claims in session state. 
 
+If you are interested in deploying this in a Windows Container in App Service, a dockerfile is also
+available in the solution directory.
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
