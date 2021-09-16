@@ -5,6 +5,7 @@ This repo contains a variety of small projects, utilities, and documents. Naming
  * "psh-": A PowerShell script
  * "util-": A small utility project
  * "sample-": A small sample or PoC
+ * "sa-": A solution accelerator project
 
 ## Contributing
 
