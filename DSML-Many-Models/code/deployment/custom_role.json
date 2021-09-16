@@ -1,0 +1,23 @@
+{
+    "Name": "AML SAL",
+    "IsCustom": true,
+    "Description": "Can obtain scoring token.",
+    "Actions": [
+
+        "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/score/action",
+        "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/token/action",
+        "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/listkeys/action"
+    ],
+    "NotActions": [
+        "Microsoft.MachineLearningServices/workspaces/*/delete",
+        "Microsoft.MachineLearningServices/workspaces/write",
+        "Microsoft.MachineLearningServices/workspaces/computes/*/write",
+        "Microsoft.MachineLearningServices/workspaces/computes/*/delete", 
+        "Microsoft.Authorization/*/write"
+
+    ],
+    "AssignableScopes": [
+        "/subscriptions/0e9bace8-7a81-4922-83b5-d995ff706507/resourceGroups/azureml",
+        "/subscriptions/0e9bace8-7a81-4922-83b5-d995ff706507/resourceGroups/azureml/providers/Microsoft.MachineLearningServices/workspaces/ws01ent"
+    ]
+}

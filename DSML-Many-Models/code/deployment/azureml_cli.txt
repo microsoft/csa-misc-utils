@@ -1,0 +1,24 @@
+
+az account set --subscription 0e9bace8-7a81-4922-83b5-d995ff706507
+az configure --defaults workspace=ws01ent group=azureml
+
+set ENDPOINT_NAME=many_model
+set WORKSPACE=ws01ent
+set LOCATION=westus2
+set ENDPOINT_NAME=many-model-sal
+az ml endpoint create --name %ENDPOINT_NAME% -f 1-sai-create-endpoint.yml
+
+az ml endpoint show --name %ENDPOINT_NAME% 
+SET system_identity=8c7f9ce7-3ca3-4c56-bbfc-1746e0409564
+az ml endpoint show --name %ENDPOINT_NAME% --query "identity.principal_id" -o tsv
+set WS_ID=/subscriptions/0e9bace8-7a81-4922-83b5-d995ff706507/resourceGroups/azureml/providers/Microsoft.MachineLearningServices/workspaces/ws01ent
+az role assignment create --assignee %system_identity% --role "Reader" --scope %WS_ID%
+
+
+az ml endpoint update -n %ENDPOINT_NAME% -f 1-sai-create-endpoint.yml
+
+#Creating a custom role
+az role definition update --role-definition custom_role.json --subscription 0e9bace8-7a81-4922-83b5-d995ff706507
+
+az role definition list --subscription 0e9bace8-7a81-4922-83b5-d995ff706507 --custom-role-only true
+az role assignment create --assignee %system_identity% --role "AML SAL" --scope %WS_ID%
