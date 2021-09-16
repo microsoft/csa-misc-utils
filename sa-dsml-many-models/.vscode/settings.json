@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "C:\\Users\\janguy\\Anaconda3\\envs\\mlflow-1a43b1fcadd2a32c00a1972c5464ff374bda3f6b\\python.exe",
-    "jupyter.jupyterServerType": "remote",
-    "azureML.defaultWorkspaceId": "/subscriptions/0e9bace8-7a81-4922-83b5-d995ff706507/resourceGroups/azureml/providers/Microsoft.MachineLearningServices/workspaces/ws01ent"
-}
