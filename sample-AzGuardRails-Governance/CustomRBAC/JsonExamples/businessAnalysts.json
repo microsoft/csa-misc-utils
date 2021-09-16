@@ -1,0 +1,31 @@
+{
+  "Name": "Business Analysts",
+  "IsCustom": true,
+  "Description": "Allows for a number of read operations + a few operations roles that allow business analysts to perform job duties.",
+  "Actions": [
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Storage/storageAccounts/read",
+    "Microsoft.Network/virtualNetworks/read",
+    "Microsoft.ResourceHealth/availabilityStatuses/read",
+    "Microsoft.Network/virtualNetworks/subnets/read",
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.resources/deployments/*",
+    "Microsoft.Compute/*/read",
+    "Microsoft.Compute/virtualMachines/restart/action",
+    "Microsoft.Compute/virtualMachineScaleSets/restart/action",
+    "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/restart/action",
+    "Microsoft.Sql/*/read"
+  ],
+  "NotActions": [
+
+  ],
+  "DataActions": [
+
+  ],
+  "NotDataActions": [
+
+  ],
+  "AssignableScopes": [
+     "/subscriptions/00000000-0000-0000-0000-000000000000"
+  ]
+}

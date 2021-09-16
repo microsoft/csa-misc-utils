@@ -1,0 +1,490 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "wafEnabled": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "WAF Enabled"
+      }
+    },
+    "wafMode": {
+      "type": "string",
+      "allowedValues": [
+        "Detection",
+        "Prevention"
+      ],
+      "defaultValue": "Detection",
+      "metadata": {
+        "description": "WAF Mode"
+      }
+    },
+    "wafRuleSetType": {
+      "type": "string",
+      "allowedValues": [
+        "OWASP"
+      ],
+      "defaultValue": "OWASP",
+      "metadata": {
+        "description": "WAF Rule Set Type"
+      }
+    },
+    "wafRuleSetVersion": {
+      "type": "string",
+      "allowedValues": [
+        "2.2.9",
+        "3.0"
+      ],
+      "defaultValue": "3.0",
+      "metadata": {
+        "description": "WAF Rule Set Version"
+      }
+    },
+    "frontendCertData": {
+      "type": "string",
+      "metadata": {
+        "description": "Base-64 encoded form of the .pfx file. This is the cert terminating on the Application Gateway."
+      }
+    },
+    "sslCertificatePassword": {
+      "type": "string",
+      "metadata": {
+        "description": "SSL certificate password. Needs to be passed as a string for the .pfx Application Gateways require."
+      }
+    },
+    "existingVNETName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the VNET to add a subnet to"
+      }
+    },
+    "newSubnetName1": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the 1st subnet to add"
+      }
+    },
+    "newSubnetAddressPrefix1": {
+      "type": "string",
+      "metadata": {
+        "description": "Address space of the 1st subnet to add"
+      }
+    },
+    "newSubnetName2": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the 1st subnet to add"
+      }
+    },
+    "newSubnetAddressPrefix2": {
+      "type": "string",
+      "metadata": {
+        "description": "Address space of the 2nd subnet to add"
+      }
+    },
+    "apiManagementName": {
+      "type": "string",
+      "defaultValue": "[concat('apim-', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Name of API Management Gateway."
+      }
+    },
+    "publisherEmail": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "The email address of the owner of the API service"
+      }
+    },
+    "publisherName": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "The name of the owner of the service"
+      }
+    },
+    "sku": {
+      "type": "string",
+      "allowedValues": [
+        "Developer",
+        "Standard",
+        "Premium"
+      ],
+      "defaultValue": "Developer",
+      "metadata": {
+        "description": "The pricing tier of this API Management service"
+      }
+    },
+    "skuCount": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2"
+      ],
+      "defaultValue": "1",
+      "metadata": {
+        "description": "The instance size of this API Management service."
+      }
+    },
+    "appGtwyName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Application Gateway."
+      }
+    },
+    "appGatewayRuleName1": {
+      "type": "string",
+      "metadata": {
+        "description": "App Gateway rule name."
+      }
+    },
+    "appGatewayRuleName2": {
+      "type": "string",
+      "metadata": {
+        "description": "App Gateway rule name."
+      }
+    },
+    "appGtwySize": {
+      "type": "string",
+      "metadata": {
+        "description": "SKU for Application Gateway."
+      }
+    },
+    "appGtwyCapacity": {
+      "type": "int",
+      "metadata": {
+        "description": "The amount of WAFs deployed"
+      }
+    },
+    "appGtwyPipDomainName": {
+      "type": "string",
+      "defaultValue": "[concat('appgtwy-', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Public DNS name to access Application Gateway from internet."
+      }
+    }
+  },
+  "variables": {
+    "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('appGtwyName'))]",
+    "loadBalancerName": "kubernetes-internal",
+    "apiManagementIP": "10.10.4.5",
+    "vNetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+    "appGtwySubRef": "[concat(variables('vNetID'), '/subnets/', parameters('newSubnetName1'))]",
+    "apimSubRef": "[concat(variables('vNetID'), '/subnets/', parameters('newSubnetName2'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('existingVNETName'), '/', parameters('newSubnetName1'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressPrefix": "[parameters('newSubnetAddressPrefix1')]"
+      }
+    },
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('existingVNETName'), '/', parameters('newSubnetName2'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressPrefix": "[parameters('newSubnetAddressPrefix2')]"
+      }
+    },
+    {
+      "apiVersion": "2017-03-01",
+      "name": "[parameters('apiManagementName')]",
+      "type": "Microsoft.ApiManagement/service",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('apimSubRef')]"
+      ],
+      "tags": {},
+      "sku": {
+        "name": "[parameters('sku')]",
+        "capacity": "[parameters('skuCount')]"
+      },
+      "properties": {
+        "publisherEmail": "[parameters('publisherEmail')]",
+        "publisherName": "[parameters('publisherName')]",
+        "virtualNetworkType": "Internal",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "[variables('apimSubRef')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.ApiManagement/service/apis",
+      "apiVersion": "2019-01-01",
+      "name": "[concat(parameters('apiManagementName'), '/healthcheck')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagementName'))]"
+      ],
+      "properties": {
+        "displayName": "HealthCheck",
+        "apiRevision": "1",
+        "subscriptionRequired": false,
+        "path": "health",
+        "protocols": [
+          "http",
+          "https"
+        ],
+        "isCurrent": true
+      }
+    },
+    {
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2019-01-01",
+      "name": "[concat(parameters('apiManagementName'), '/healthcheck/healthcheck')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apiManagementName'), 'healthcheck')]",
+        "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagementName'))]"
+      ],
+      "properties": {
+        "displayName": "HealthCheck",
+        "method": "GET",
+        "urlTemplate": "/check",
+        "templateParameters": [],
+        "responses": []
+      }
+    },
+    {
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2019-01-01",
+      "name": "[concat(parameters('apiManagementName'), '/healthcheck/healthcheck/policy')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('apiManagementName'), 'healthcheck', 'healthcheck')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('apiManagementName'), 'healthcheck')]",
+        "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagementName'))]"
+      ],
+      "properties": {
+        "value": "<!--\r\n    IMPORTANT:\r\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\r\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\r\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\r\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\r\n    - To remove a policy, delete the corresponding policy statement from the policy document.\r\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\r\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\r\n    - Policies are applied in the order of their appearance, from the top down.\r\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\r\n-->\r\n<policies>\r\n  <inbound>\r\n    <base />\r\n    <mock-response status-code=\"200\" content-type=\"application/json\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>",
+        "format": "xml"
+      }
+    },
+    {
+      "apiVersion": "2018-12-01",
+      "name": "[parameters('appGtwyName')]",
+      "type": "Microsoft.Network/applicationGateways",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('appGtwyPipDomainName'))]"
+      ],
+        "properties": {
+          "sku": {
+            "name": "[parameters('appGtwySize')]",
+            "tier": "WAF",
+            "capacity": "[parameters('appGtwyCapacity')]"
+          },
+          "gatewayIPConfigurations": [
+            {
+              "name": "appGatewayIpConfig",
+              "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations",
+              "properties": {
+                "subnet": {
+                  "id": "[variables('appGtwySubRef')]"
+                }
+              }
+            }
+          ],
+          "sslCertificates": [
+            {
+              "name": "appgwssl",
+              "type": "Microsoft.Network/applicationGateways/sslCertificates",
+              "properties": {
+                "data": "[parameters('frontendCertData')]",
+                "password": "Sh@k3en_123"
+              }
+            }
+          ],
+          "authenticationCertificates": [],
+          "frontendIPConfigurations": [
+            {
+              "name": "appGatewayPublicFrontendIP",
+              "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGtwyPipDomainName'))]"
+                }
+              }
+            }
+          ],
+          "frontendPorts": [
+            {
+              "name": "appGatewayFrontendPort80",
+              "type": "Microsoft.Network/applicationGateways/frontendPorts",
+              "properties": {
+                "Port": 80
+              }
+            },
+            {
+              "name": "appGatewayFrontendPort443",
+              "type": "Microsoft.Network/applicationGateways/frontendPorts",
+              "properties": {
+                "Port": 443
+              }
+            }
+          ],
+          "backendAddressPools": [
+            {
+              "name": "apim-bkend",
+              "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+              "properties": {
+                "backendAddresses": [
+                  {
+                    "IpAddress": "[variables('apiManagementIP')]"
+                  }
+                ]
+              }
+            }
+          ],
+          "backendHttpSettingsCollection": [
+            {
+              "name": "appGatewayBackendHttpSettings",
+              "type": "Microsoft.Network/applicationGateways/backendHttpSettingsCollection",
+              "properties": {
+                "port": 80,
+                "protocol": "Http",
+                "hostName": "[concat(parameters('apiManagementName'), '.azure-api.net')]",
+                "cookieBasedAffinity": "Disabled",
+                "pickHostNameFromBackendAddress": false,
+                "requestTimeout": 30,
+                "probe": {
+                  "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('appGtwyName')), '/probes/healthcheck')]"
+                }
+              }
+            }
+          ],
+          "httpListeners": [
+            {
+              "name": "appGatewayBackendHttpListener",
+              "type": "Microsoft.Network/applicationGateways/httpListeners",
+              "properties": {
+                "frontendIPConfiguration": {
+                  "id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayPublicFrontendIP')]"
+                },
+                "frontendPort": {
+                  "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort80')]"
+                },
+                "protocol": "Http",
+                "requireServerNameIndication": false
+              }
+            },
+            {
+              "name": "appGatewayBackendHttpsListener",
+              "type": "Microsoft.Network/applicationGateways/httpListeners",
+              "properties": {
+                "frontendIPConfiguration": {
+                  "id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayPublicFrontendIP')]"
+                },
+                "frontendPort": {
+                  "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort443')]"
+                },
+                "sslCertificate": {
+                  "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/appgwssl')]",
+                  "publicCertData": "[parameters('frontendCertData')]"
+                },
+                "protocol": "Https",
+                "requireServerNameIndication": false
+              }
+            }
+          ],
+          "urlPathMaps": [],
+          "requestRoutingRules": [
+            {
+              "name": "[parameters('appGatewayRuleName1')]",
+              "type": "Microsoft.Network/applicationGateways/requestRoutingRules",
+              "properties": {
+                "RuleType": "Basic",
+                "httpListener": {
+                  "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayBackendHttpListener')]"
+                },
+                "backendAddressPool": {
+                  "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/apim-bkend')]"
+                },
+                "backendHttpSettings": {
+                  "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                }
+              }
+            },
+            {
+              "name": "[parameters('appGatewayRuleName2')]",
+              "type": "Microsoft.Network/applicationGateways/requestRoutingRules",
+              "properties": {
+                "RuleType": "Basic",
+                "httpListener": {
+                  "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayBackendHttpsListener')]"
+                },
+                "backendAddressPool": {
+                  "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/apim-bkend')]"
+                },
+                "backendHttpSettings": {
+                  "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+                }
+              }
+            }
+          ],
+          "probes": [
+            {
+              "name": "healthcheck",
+              "type": "Microsoft.Network/applicationGateways/probes",
+              "properties": {
+                "protocol": "Http",
+                "path": "/health/check",
+                "interval": 30,
+                "timeout": 30,
+                "unhealthyThreshold": 3,
+                "pickHostNameFromBackendHttpSettings": true,
+                "minServers": 0,
+                "match": {
+                  "statusCodes": [
+                    "200-399"
+                  ]
+                }
+              }
+            }
+          ],
+          "webApplicationFirewallConfiguration": {
+            "enabled": "[parameters('wafEnabled')]",
+            "firewallMode": "[parameters('wafMode')]",
+            "ruleSetType": "[parameters('wafRuleSetType')]",
+            "ruleSetVersion": "[parameters('wafRuleSetVersion')]",
+            "disabledRuleGroups": [],
+            "requestBodyCheck": true,
+            "maxRequestBodySizeInKb": 128,
+            "fileUploadLimitInMb": 100
+          },
+          "enableHttp2": false
+        }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2018-12-01",
+      "name": "[parameters('appGtwyPipDomainName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4,
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('appGtwyPipDomainName')]"
+        },
+        "ipTags": []
+      }
+    }
+  ],
+  "outputs": {}
+}

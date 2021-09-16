@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "keyVaultSku": {
+      "value": "Standard"
+    },
+    "enabledForDeployment": {
+      "value": true
+    },
+    "enabledForTemplateDeployment": {
+      "value": true
+    },
+    "enabledForDiskEncryption": {
+      "value": true
+    },
+    "keyPermissions": {
+      "value": [
+        "get",
+        "list",
+        "update",
+        "create",
+        "import",
+        "delete",
+        "recover",
+        "backup",
+        "restore",
+        "decrypt",
+        "encrypt",
+        "unwrapKey",
+        "wrapKey",
+        "verify",
+        "sign",
+        "purge"
+      ]
+    },
+    "secretPermissions": {
+      "value": [
+        "get",
+        "list",
+        "set",
+        "delete",
+        "recover",
+        "backup",
+        "restore",
+        "purge"
+      ]
+    },
+    "certificatePermissions": {
+      "value": [
+        "get",
+        "list",
+        "set",
+        "delete",
+        "recover",
+        "backup",
+        "restore",
+        "purge"
+      ]
+    },
+    "tenantId": {
+      "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+    },
+    "objectId": {
+      "value": "67a00545-bee5-4a8e-85ec-9a6595f7f0e0"
+    }
+  }
+}

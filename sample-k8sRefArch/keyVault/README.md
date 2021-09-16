@@ -1,0 +1,2 @@
+# Key Vault Folder Read Me
+The files in these folders walk you through how to set up a Key Vault, either through PowerShel or an ARM Template. In addition, the PoSH folder contains code on how to place a secret into your Key Vault. The purpose of these files is to stand up a Key Vault and add the public SSH key (K8s cluster), Service Principal password, and the SSL cert password (Application Gateway). Building a Key Vault means you are not storing credentials in code and is best practice for any development team.

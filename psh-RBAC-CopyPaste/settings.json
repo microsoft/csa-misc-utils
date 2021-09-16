@@ -1,0 +1,9 @@
+﻿{
+    "SubscriptionName": "[Subscription name]",
+    "SubscriptionId": "[Subscription ID]",
+    "SourceTenant": "[Source tenant name, like contoso.onmicrosoft.com]",
+    "SourceTenantID": "[Source tenant ID]",
+    "DestTenant": "[Destination tenant name, like fabrikam.onmicrosoft.com]",
+    "DestTenantID": "[Destination tenant ID]"
+}
+

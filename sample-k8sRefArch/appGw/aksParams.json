@@ -1,0 +1,100 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "spAppId": {
+      "value": "e1ce23e5-4c4e-4aa0-ad39-7d945f6695c3"
+    },
+    "spObjectId": {
+      "value": "eb8e6c40-2735-43a7-a68e-0e127a14d80b"
+    },
+    "spSecret": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/9c29eddd-8897-46b5-b8ca-503e7ba5b463/resourceGroups/keyVault/providers/Microsoft.KeyVault/vaults/kv-6e6dnpt2p5fxi"
+        },
+        "secretName": "spPw"
+      }
+    },
+    "rgName": {
+      "value": "k8s"
+    },
+    "vnetName": {
+      "value": "k8sVnet"
+    },
+    "vnetTag": {
+      "value": "AKS vNet"
+    },
+    "vnetAddrPrefix": {
+      "value": "10.10.0.0/16"
+    },
+    "sub1Name": {
+      "value": "k8sCluster"
+    },
+    "sub1Prefix": {
+      "value": "10.10.1.0/24"
+    },
+    "sub2Name": {
+      "value": "k8sServices"
+    },
+    "sub2Prefix": {
+      "value": "10.10.2.0/24"
+    },
+    "logAnalyticsWorkspaceId": {
+      "value": "/subscriptions/9c29eddd-8897-46b5-b8ca-503e7ba5b463/resourcegroups/sbk-la/providers/microsoft.operationalinsights/workspaces/sbk-log-analytics-25924"
+    },
+    "aksClusterName": {
+      "value": "k8s"
+    },
+    "dnsPrefix": {
+      "value": "k8ssbk"
+    },
+    "k8sVersion": {
+      "value": "1.12.8"
+    },
+    "nodeCount": {
+      "value": 3
+    },
+    "nodeVmSize": {
+      "value": "Standard_DS1_v2"
+    },
+    "osType": {
+      "value": "Linux"
+    },
+    "osAdminUser": {
+      "value": "sbkadmin"
+    },
+    "sshPubKey": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/9c29eddd-8897-46b5-b8ca-503e7ba5b463/resourceGroups/keyVault/providers/Microsoft.KeyVault/vaults/kv-6e6dnpt2p5fxi"
+        },
+        "secretName": "k8sSsh"
+      }
+    },
+    "maxPods": {
+      "value": 31
+    },
+    "enableHttpApplicationRouting": {
+      "value": false
+    },
+    "networkPlugin": {
+      "value": "azure"
+    },
+    "enableRBAC": {
+      "value": true
+    },
+    "serviceCidr": {
+      "value": "10.0.0.0/16"
+    },
+    "dnsServiceIP": {
+      "value": "10.0.0.10"
+    },
+    "dockerBridgeCidr": {
+      "value": "172.17.0.1/16"
+    },
+    "aksEnv": {
+      "value": "k8s"
+    }
+  }
+}

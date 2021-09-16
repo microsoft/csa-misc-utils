@@ -1,0 +1,43 @@
+# escape=`
+
+FROM mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2019
+SHELL ["powershell", "-command"]
+
+RUN Install-WindowsFeature Web-ASP; `
+    Install-WindowsFeature Web-CGI; `
+    Install-WindowsFeature Web-ISAPI-Ext; `
+    Install-WindowsFeature Web-ISAPI-Filter; `
+    Install-WindowsFeature Web-Includes; `
+    Install-WindowsFeature Web-HTTP-Errors; `
+    Install-WindowsFeature Web-Common-HTTP; `
+    Install-WindowsFeature Web-Performance; `
+    Install-WindowsFeature WAS; `
+    Import-module IISAdministration;
+
+RUN md c:/msi;
+
+RUN Invoke-WebRequest 'https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi' -OutFile c:/msi/urlrewrite2.msi; `
+    Start-Process 'c:/msi/urlrewrite2.msi' '/qn' -PassThru | Wait-Process;
+
+EXPOSE 80
+
+RUN Remove-Website -Name 'Default Web Site'; `
+    md c:\mywebsite; `
+    New-IISSite -Name "mywebsite" `
+                -PhysicalPath 'c:\mywebsite' `
+                -BindingInformation "*:80:";
+
+RUN & c:\windows\system32\inetsrv\appcmd.exe `
+    unlock config `
+    /section:system.webServer/asp
+
+RUN & c:\windows\system32\inetsrv\appcmd.exe `
+      unlock config `
+      /section:system.webServer/handlers
+
+RUN & c:\windows\system32\inetsrv\appcmd.exe `
+      unlock config `
+      /section:system.webServer/modules
+	  
+	  	  
+ADD . c:\mywebsite

@@ -1,0 +1,15 @@
+{
+  "Name": "Reader Support Tickets",
+  "IsCustom": true,
+  "Description": "View everything in the subscription and also open support tickets.",
+  "Actions": [
+    "*/read",
+    "Microsoft.Support/*"
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/00000000-0000-0000-0000-000000000000"
+  ]
+}

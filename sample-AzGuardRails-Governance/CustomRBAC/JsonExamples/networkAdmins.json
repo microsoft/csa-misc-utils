@@ -1,0 +1,25 @@
+{
+  "Name": "Network Administrators",
+  "IsCustom": true,
+  "Description": "Allows for networking functions related to Azure environments.",
+  "Actions": [
+    "*/read",
+    "Microsoft.Network/*",
+    "Microsoft.Resources/subscriptions/resourceGroups/write",
+    "Microsoft.Storage/storageaccounts/write",
+    "Microsoft.Storage/storageAccounts/read",
+    "Microsoft.resources/deployments/*"
+  ],
+  "NotActions": [
+
+  ],
+  "DataActions": [
+
+  ],
+  "NotDataActions": [
+
+  ],
+  "AssignableScopes": [
+    "/subscriptions/00000000-0000-0000-0000-000000000000"
+  ]
+}

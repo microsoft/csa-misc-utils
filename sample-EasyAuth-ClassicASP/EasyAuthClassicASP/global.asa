@@ -1,0 +1,9 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>
+Sub Application_OnStart
+
+End Sub
+ 
+Sub Session_OnStart
+
+End Sub
+</SCRIPT>

@@ -1,0 +1,21 @@
+{
+  "Name": "Cloud Ops Engineering Lead",
+  "IsCustom": true,
+  "Description": "Allows for a lot of control over Azure environments. Does not allow ability to delete or create virtual networks",
+  "Actions": [
+    "*"
+  ],
+  "NotActions": [
+    "Microsoft.Network/*/delete",
+    "Microsoft.Network/*/write"
+  ],
+  "DataActions": [
+
+  ],
+  "NotDataActions": [
+
+  ],
+  "AssignableScopes": [
+    "/subscriptions/00000000-0000-0000-0000-000000000000"
+  ]
+}

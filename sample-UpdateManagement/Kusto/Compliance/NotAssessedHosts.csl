@@ -1,0 +1,54 @@
+//-----------------------------------------------------------------------------------
+// Created 
+// 2018.12.05
+// Shannon Kuehn
+// Last Updated
+//
+// © 2018 Microsoft Corporation. 
+// All rights reserved. Sample scripts/code provided herein are not supported under any Microsoft standard support program 
+// or service. The sample scripts/code are provided AS IS without warranty of any kind. Microsoft disclaims all implied 
+// warranties including, without limitation, any implied warranties of merchantability or of fitness for a particular 
+// purpose. The entire risk arising out of the use or performance of the sample scripts and documentation remains with you. 
+// In no event shall Microsoft, its authors, or anyone else involved in the creation, production, or delivery of the scripts 
+// be liable for any damages whatsoever (including, without limitation, damages for loss of business profits, business 
+// interruption, loss of business information, or other pecuniary loss) arising out of the use of or inability to use the 
+// sample scripts or documentation, even if Microsoft has been advised of the possibility of such damages.
+//
+// Update Management
+//
+// Not Assessed Servers - Lists all servers that are not able to be assessed via Update Management.
+//-----------------------------------------------------------------------------------
+
+Heartbeat
+| where TimeGenerated>ago(12h) and OSType=~"Windows" and notempty(Computer)
+| summarize arg_max(TimeGenerated, Solutions) by SourceComputerId, Computer
+| where Solutions has "updates"
+| distinct SourceComputerId, Computer
+| join  kind=leftouter
+(
+    Update
+    | where TimeGenerated>ago(14h) and OSType!="Linux"
+    | summarize hint.strategy=partitioned arg_max(TimeGenerated, UpdateState, Approved, Optional, Classification) by SourceComputerId, UpdateID, Computer
+    | distinct SourceComputerId, Classification, UpdateState, Approved, Optional, Computer
+    | summarize WorstMissingUpdateSeverity=max(iff(UpdateState=~"Needed" and (Optional==false or Classification has "Critical" or Classification has "Security") and Approved!=false, iff(Classification has "Critical", 4, iff(Classification has "Security", 2, 1)), 0)) by SourceComputerId, Computer
+)
+on SourceComputerId
+| extend WorstMissingUpdateSeverity=coalesce(WorstMissingUpdateSeverity,-1)
+| summarize computersBySeverity=count() by WorstMissingUpdateSeverity , Computer
+| union (Heartbeat
+| where TimeGenerated>ago(12h) and OSType=="Linux" and notempty(Computer)
+| summarize arg_max(TimeGenerated, Solutions) by SourceComputerId, Computer
+| where Solutions has "updates"
+| distinct SourceComputerId , Computer
+| join  kind=leftouter
+(
+    Update
+    | where TimeGenerated>ago(5h) and OSType=="Linux"
+    | summarize hint.strategy=partitioned arg_max(TimeGenerated, UpdateState, Classification) by SourceComputerId, Product, ProductArch, Computer
+    | distinct SourceComputerId, Classification, UpdateState, Computer
+    | summarize WorstMissingUpdateSeverity=max(iff(UpdateState=~"Needed", iff(Classification has "Critical", 4, iff(Classification has "Security", 2, 1)), 0)) by SourceComputerId)
+on SourceComputerId
+| extend WorstMissingUpdateSeverity=coalesce(tolong(WorstMissingUpdateSeverity), -1)
+)
+| where WorstMissingUpdateSeverity ==-1
+| summarize NotAssessedTrue=count(WorstMissingUpdateSeverity) by Computer

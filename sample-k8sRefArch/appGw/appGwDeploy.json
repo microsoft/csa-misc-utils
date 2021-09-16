@@ -1,0 +1,353 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    },
+    "wafEnabled": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "WAF Enabled"
+      }
+    },
+    "wafMode": {
+      "type": "string",
+      "allowedValues": [
+        "Detection",
+        "Prevention"
+      ],
+      "defaultValue": "Detection",
+      "metadata": {
+        "description": "WAF Mode"
+      }
+    },
+    "wafRuleSetType": {
+      "type": "string",
+      "allowedValues": [
+        "OWASP"
+      ],
+      "defaultValue": "OWASP",
+      "metadata": {
+        "description": "WAF Rule Set Type"
+      }
+    },
+    "wafRuleSetVersion": {
+      "type": "string",
+      "allowedValues": [
+        "2.2.9",
+        "3.0"
+      ],
+      "defaultValue": "3.0",
+      "metadata": {
+        "description": "WAF Rule Set Version"
+      }
+    },
+    "frontendCertData": {
+      "type": "string",
+      "metadata": {
+        "description": "Base-64 encoded form of the .pfx file. This is the cert terminating on the Application Gateway."
+      }
+    },
+    "sslCertificatePassword": {
+      "type": "string",
+      "metadata": {
+        "description": "SSL certificate password. Needs to be passed as a string for the .pfx Application Gateways require."
+      }
+    },
+    "existingVNETName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the VNET to add a subnet to"
+      }
+    },
+    "newSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the subnet to add"
+      }
+    },
+    "newSubnetAddressPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Address space of the subnet to add"
+      }
+    },
+    "appGtwyName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of Application Gateway."
+      }
+    },
+    "appGatewayRuleName1": {
+      "type": "string",
+      "metadata": {
+        "description": "App Gateway rule name."
+      }
+    },
+    "appGatewayRuleName2": {
+      "type": "string",
+      "metadata": {
+        "description": "App Gateway rule name."
+      }
+    },
+    "appGtwySize": {
+      "type": "string",
+      "metadata": {
+        "description": "SKU for Application Gateway."
+      }
+    },
+    "appGtwyCapacity": {
+      "type": "int",
+      "metadata": {
+        "description": "The amount of WAFs deployed"
+      }
+    },
+    "appGtwyPipDomainName": {
+      "type": "string",
+      "metadata": {
+        "description": "Public DNS name to access Application Gateway from internet."
+      },
+      "defaultValue": "[concat('appgtwy-', uniqueString(resourceGroup().id))]"
+    }
+  },
+  "variables": {
+    "applicationGatewayID": "[resourceId('Microsoft.Network/applicationGateways', parameters('appGtwyName'))]",
+    "loadBalancerName": "kubernetes-internal",
+    "vNetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('existingVNETName'))]",
+    "appGtwySubRef": "[concat(variables('vNetID'), '/subnets/', parameters('newSubnetName'))]",
+    "k8sIngressControllerIp": "10.10.1.200"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-04-01",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('existingVNETName'), '/', parameters('newSubnetName'))]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressPrefix": "[parameters('newSubnetAddressPrefix')]"
+      }
+    },
+    {
+      "apiVersion": "2018-12-01",
+      "name": "[parameters('appGtwyName')]",
+      "type": "Microsoft.Network/applicationGateways",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[parameters('appGtwyPipDomainName')]"
+      ],
+      "properties": {
+        "sku": {
+          "name": "[parameters('appGtwySize')]",
+          "tier": "WAF",
+          "capacity": "[parameters('appGtwyCapacity')]"
+        },
+        "gatewayIPConfigurations": [
+          {
+            "name": "appGatewayIpConfig",
+            "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations",
+            "properties": {
+              "subnet": {
+                "id": "[variables('appGtwySubRef')]"
+              }
+            }
+          }
+        ],
+        "sslCertificates": [
+          {
+            "name": "appgwssl",
+            "type": "Microsoft.Network/applicationGateways/sslCertificates",
+            "properties": {
+              "data": "[parameters('frontendCertData')]",
+              "password": "Sh@k3en_123"
+            }
+          }
+        ],
+        "authenticationCertificates": [],
+        "frontendIPConfigurations": [
+          {
+            "name": "appGatewayPublicFrontendIP",
+            "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGtwyPipDomainName'))]"
+              }
+            }
+          }
+        ],
+        "frontendPorts": [
+          {
+            "name": "appGatewayFrontendPort80",
+            "type": "Microsoft.Network/applicationGateways/frontendPorts",
+            "properties": {
+              "Port": 80
+            }
+          },
+          {
+            "name": "appGatewayFrontendPort443",
+            "type": "Microsoft.Network/applicationGateways/frontendPorts",
+            "properties": {
+              "Port": 443
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "appGatewayBackendPool",
+            "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+            "properties": {
+              "backendAddresses": [
+                {
+                  "IpAddress": "[variables('k8sIngressControllerIp')]"
+                }
+              ]
+            }
+          }
+        ],
+        "backendHttpSettingsCollection": [
+          {
+            "name": "appGatewayBackendHttpSettings",
+            "type": "Microsoft.Network/applicationGateways/backendHttpSettingsCollection",
+            "properties": {
+              "port": 80,
+              "protocol": "Http",
+              "cookieBasedAffinity": "Disabled",
+              "pickHostNameFromBackendAddress": false,
+              "requestTimeout": 30,
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('appGtwyName')), '/probes/k8sprobe')]"
+              }
+            }
+          }
+        ],
+        "httpListeners": [
+          {
+            "name": "appGatewayBackendHttpListener",
+            "type": "Microsoft.Network/applicationGateways/httpListeners",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayPublicFrontendIP')]"
+              },
+              "frontendPort": {
+                "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort80')]"
+              },
+              "protocol": "Http",
+              "requireServerNameIndication": false
+            }
+          },
+          {
+            "name": "appGatewayBackendHttpsListener",
+            "type": "Microsoft.Network/applicationGateways/httpListeners",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayPublicFrontendIP')]"
+              },
+              "frontendPort": {
+                "id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort443')]"
+              },
+              "sslCertificate": {
+                "id": "[concat(variables('applicationGatewayID'), '/sslCertificates/appgwssl')]",
+                "publicCertData": "[parameters('frontendCertData')]"
+              },
+              "protocol": "Https",
+              "requireServerNameIndication": false
+            }
+          }
+        ],
+        "urlPathMaps": [],
+        "requestRoutingRules": [
+          {
+            "name": "[parameters('appGatewayRuleName1')]",
+            "type": "Microsoft.Network/applicationGateways/requestRoutingRules",
+            "properties": {
+              "RuleType": "Basic",
+              "httpListener": {
+                "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayBackendHttpListener')]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool')]"
+              },
+              "backendHttpSettings": {
+                "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+              }
+            }
+          },
+          {
+            "name": "[parameters('appGatewayRuleName2')]",
+            "type": "Microsoft.Network/applicationGateways/requestRoutingRules",
+            "properties": {
+              "RuleType": "Basic",
+              "httpListener": {
+                "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayBackendHttpsListener')]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool')]"
+              },
+              "backendHttpSettings": {
+                "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "k8sprobe",
+            "type": "Microsoft.Network/applicationGateways/probes",
+            "properties": {
+              "protocol": "Http",
+              "host": "public-demo-echo-service.kube.local",
+              "path": "/health/check",
+              "interval": 30,
+              "timeout": 30,
+              "unhealthyThreshold": 3,
+              "pickHostNameFromBackendHttpSettings": false,
+              "minServers": 0,
+              "match": {
+                "statusCodes": [
+                  "200-399"
+                ]
+              }
+            }
+          }
+        ],
+        "webApplicationFirewallConfiguration": {
+          "enabled": "[parameters('wafEnabled')]",
+          "firewallMode": "[parameters('wafMode')]",
+          "ruleSetType": "[parameters('wafRuleSetType')]",
+          "ruleSetVersion": "[parameters('wafRuleSetVersion')]",
+          "disabledRuleGroups": [],
+          "requestBodyCheck": true,
+          "maxRequestBodySizeInKb": 128,
+          "fileUploadLimitInMb": 100
+        },
+        "enableHttp2": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2018-12-01",
+      "name": "[parameters('appGtwyPipDomainName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Basic",
+        "tier": "Regional"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4,
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('appGtwyPipDomainName')]"
+        },
+        "ipTags": []
+      }
+    }
+  ],
+  "outputs": {}
+}
