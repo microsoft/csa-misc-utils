@@ -21,7 +21,7 @@ mccabe==0.6.1
 msrest==0.6.4
 msrestazure==0.6.0
 oauthlib==3.0.1
-protobuf==3.6.1
+protobuf==3.15.0
 pycparser==2.19
 PyJWT==1.7.1
 pylint==2.2.2
