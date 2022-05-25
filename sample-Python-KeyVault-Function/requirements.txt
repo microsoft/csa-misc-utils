@@ -23,7 +23,7 @@ msrestazure==0.6.0
 oauthlib==3.0.1
 protobuf==3.15.0
 pycparser==2.19
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.2.2
 python-dateutil==2.7.5
 requests==2.21.0
