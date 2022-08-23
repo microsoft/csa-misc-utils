@@ -14,42 +14,9 @@ from inference_schema.parameter_types.pandas_parameter_type import PandasParamet
 from azureml.core.authentication import MsiAuthentication,ServicePrincipalAuthentication,TokenAuthentication, Audience
 import json
 import ast
-# def get_token_for_audience(audience):
-#     from adal import AuthenticationContext
-#     client_id = "df3335cd-b8e2-4de8-86c1-a834e51e9b94"
-#     # client_secret = "my-client-secret"
-#     msi_endpoint = os.environ.get("MSI_ENDPOINT", None)
-#     client_secret = os.environ.get("MSI_SECRET", None)
-#     print("the secret is ",client_secret)
-#     print(" the endpoint is ", msi_endpoint)
-
-
-#     tenant_id ='72f988bf-86f1-41af-91ab-2d7cd011db47' 
-#     auth_context = AuthenticationContext("https://login.microsoftonline.com/{}".format(tenant_id))
-#     resp = auth_context.acquire_token_with_client_credentials(audience,client_id,client_secret)
-#     token = resp["accessToken"]
-#     print("get token back, ", token)
-#     return token
 
 def init():
     global ws
-    # tenant_id ='72f988bf-86f1-41af-91ab-2d7cd011db47' 
-    # service_principal_id='af883abf-89dd-4889-bdb3-1ee84f68465e'
-    # service_principal_password='QQ_w21c~7f.f41ir.9DbV.jDEpH4TouZ.0'
-    subscription_id = '0e9bace8-7a81-4922-83b5-d995ff706507'
-    # # Azure Machine Learning resource group NOT the managed resource group
-    resource_group = 'azureml' 
-    workspace_name = 'ws01ent'
-    # sp_auth = ServicePrincipalAuthentication(tenant_id =tenant_id,
-    #                                      service_principal_id=service_principal_id,
-    #                                      service_principal_password=service_principal_password)
-
-
-    # ws = Workspace.get(name=workspace_name,
-    #                     subscription_id=subscription_id,
-    #                     resource_group=resource_group,auth= sp_auth)
-
-
     try:
         msi_auth = MsiAuthentication()
         print("MSI is successful")
