@@ -6,7 +6,7 @@ azure-functions==1.0.0a5
 azure-functions-worker==1.0.0a6
 azure-keyvault==1.1.0
 azure-nspkg==3.0.2
-certifi==2018.11.29
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 colorama==0.4.1
